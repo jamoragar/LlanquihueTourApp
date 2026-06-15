@@ -1,0 +1,10 @@
+1;RutaSaboresDelLago;gastronomico;25000
+2;PaseoLacustreLlanquihue;lacustre;32000
+3;TourPatrimonialFrutillar;cultural;18000
+4;ExperienciaCervezaArtesanal;gastronomico;28000
+5;SenderoVolcanOsorno;aventura;45000
+6;MercadoLocalPuertoVaras;gastronomico;15000
+7;NavegacionIslaLoreley;lacustre;35000
+8;MuseoColonialAlemana;cultural;12000
+9;TourFotograficoLago;personalizado;30000
+10;CircuitoTermasDelSur;relajacion;40000
