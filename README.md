@@ -55,7 +55,6 @@ LlanquihueTourApp/
 `-- nbproject/
 ```
 
-Se mantiene `ui.Main` como clase principal para continuar la estructura usada en la primera iteracion del proyecto. El paquete `ui` cumple el rol de punto de entrada y coordinador de la ejecucion por consola.
 
 ## Clases Principales
 
@@ -96,17 +95,6 @@ Reglas del archivo:
 - Nombre, comuna, telefono y email no pueden estar vacios.
 - El telefono debe contener solo digitos.
 - El email debe contener `@` y dominio.
-
-## Validaciones Implementadas
-
-- Archivo inexistente: informa el error y finaliza de forma controlada.
-- Archivo vacio: informa que no hay registros.
-- Linea con cantidad incorrecta de campos: rechaza la linea y continua.
-- ID no numerico o menor que 1: rechaza la linea.
-- ID duplicado: conserva el primer registro y rechaza el repetido.
-- Tipo desconocido: rechaza la linea.
-- Telefono o email invalidos: rechaza la linea.
-- Integridad de carga: una linea incorrecta no detiene la lectura completa.
 
 ## Requisitos Para Ejecutar
 
