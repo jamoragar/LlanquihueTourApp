@@ -1,26 +1,24 @@
 package model;
 
-public class Tour {
+public class PersonaVinculada {
 
-    // Atributos de la clase
     private int id;
     private String nombre;
     private String tipo;
-    private double precio;
+    private String comuna;
+    private Contacto contacto;
 
-    // Constructor vacio
-    public Tour() {
+    public PersonaVinculada() {
     }
 
-    // Constructor con parametros
-    public Tour(int id, String nombre, String tipo, double precio) {
+    public PersonaVinculada(int id, String nombre, String tipo, String comuna, Contacto contacto) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.precio = precio;
+        this.comuna = comuna;
+        this.contacto = contacto;
     }
 
-    // Metodos getter y setter
     public int getId() {
         return id;
     }
@@ -45,20 +43,28 @@ public class Tour {
         this.tipo = tipo;
     }
 
-    public double getPrecio() {
-        return precio;
+    public String getComuna() {
+        return comuna;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setComuna(String comuna) {
+        this.comuna = comuna;
     }
 
-    // Metodo toString para mostrar la informacion del objeto
+    public Contacto getContacto() {
+        return contacto;
+    }
+
+    public void setContacto(Contacto contacto) {
+        this.contacto = contacto;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id +
                 " | Nombre: " + nombre +
                 " | Tipo: " + tipo +
-                " | Precio: $" + precio;
+                " | Comuna: " + comuna +
+                "\nContacto: " + contacto;
     }
 }

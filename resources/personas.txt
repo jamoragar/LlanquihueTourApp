@@ -1,0 +1,10 @@
+1;Ana Soto;guia;Puerto Varas;987654321;ana.soto@email.cl
+2;Carlos Diaz;operador;Llanquihue;976543210;carlos.diaz@email.cl
+3;Maria Perez;proveedor;Frutillar;965432109;maria.perez@email.cl
+4;Jose Munoz;guia;Puerto Montt;954321098;jose.munoz@email.cl
+5;Paula Rojas;operador;Puerto Varas;943210987;paula.rojas@email.cl
+6;Luis Vera;proveedor;Llanquihue;932109876;luis.vera@email.cl
+7;Camila Torres;guia;Frutillar;921098765;camila.torres@email.cl
+8;Pedro Silva;operador;Puerto Montt;910987654;pedro.silva@email.cl
+9;Daniela Ruiz;proveedor;Puerto Varas;989876543;daniela.ruiz@email.cl
+10;Felipe Soto;guia;Llanquihue;978765432;felipe.soto@email.cl
