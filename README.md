@@ -4,11 +4,10 @@ Aplicacion Java de consola para gestionar personas vinculadas a la agencia Llanq
 
 ## Datos del Autor
 
-- Nombre: [Completar nombre]
-- Seccion: [Completar seccion]
-- Carrera: [Completar carrera]
-- Sede: [Completar sede]
-- Fecha de entrega: [Completar fecha]
+- Nombre: Javier A. Moraga Rojas
+- Carrera: Analista Programador Computacional
+- Asignatura: Desarrollo Orietado a Obejtos I
+- Fecha de entrega: 22/06/2026
 
 ## Problematica
 
@@ -176,7 +175,3 @@ Si no hay coincidencias, el sistema muestra:
 No se encontraron personas para la busqueda solicitada.
 ```
 
-## Repositorio y Video
-
-- Repositorio GitHub: [Completar enlace]
-- Video demostrativo: [Completar enlace]
