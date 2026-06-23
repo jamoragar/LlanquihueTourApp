@@ -1,6 +1,7 @@
 package data;
 
 import model.Contacto;
+import model.Direccion;
 import model.PersonaVinculada;
 import util.ValidadorDatos;
 
@@ -42,8 +43,8 @@ public class GestorArchivo {
 
                 String[] datos = linea.split(";", -1);
 
-                if (datos.length != 6) {
-                    System.out.println("Linea " + numeroLinea + " rechazada: debe contener 6 campos.");
+                if (datos.length != 8) {
+                    System.out.println("Linea " + numeroLinea + " rechazada: debe contener 8 campos.");
                     continue;
                 }
 
@@ -52,8 +53,10 @@ public class GestorArchivo {
                     String nombre = datos[1].trim();
                     String tipo = datos[2].trim();
                     String comuna = datos[3].trim();
-                    String telefono = datos[4].trim();
-                    String email = datos[5].trim();
+                    String calle = datos[4].trim();
+                    int numero = ValidadorDatos.convertirNumero(datos[5]);
+                    String telefono = datos[6].trim();
+                    String email = datos[7].trim();
 
                     if (idsCargados.contains(id)) {
                         System.out.println("Linea " + numeroLinea + " rechazada: ID duplicado " + id + ".");
@@ -62,6 +65,7 @@ public class GestorArchivo {
 
                     if (!ValidadorDatos.esTextoValido(nombre) ||
                             !ValidadorDatos.esTextoValido(comuna) ||
+                            !ValidadorDatos.esTextoValido(calle) ||
                             !ValidadorDatos.esTelefonoValido(telefono) ||
                             !ValidadorDatos.esEmailValido(email) ||
                             !ValidadorDatos.esTipoValido(tipo)) {
@@ -70,7 +74,8 @@ public class GestorArchivo {
                     }
 
                     Contacto contacto = new Contacto(telefono, email);
-                    PersonaVinculada persona = new PersonaVinculada(id, nombre, tipo, comuna, contacto);
+                    Direccion direccion = new Direccion(calle, numero, comuna, "Los Lagos");
+                    PersonaVinculada persona = new PersonaVinculada(id, nombre, tipo, comuna, contacto, direccion);
 
                     personas.add(persona);
                     idsCargados.add(id);

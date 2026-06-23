@@ -47,4 +47,14 @@ public class ValidadorDatos {
 
         return id;
     }
+
+    public static int convertirNumero(String valor) throws NumberFormatException {
+        int numero = Integer.parseInt(valor.trim());
+
+        if (numero <= 0) {
+            throw new NumberFormatException("El numero debe ser mayor que cero");
+        }
+
+        return numero;
+    }
 }
