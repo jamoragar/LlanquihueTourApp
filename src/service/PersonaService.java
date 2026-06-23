@@ -33,14 +33,14 @@ public class PersonaService {
         return null;
     }
 
-    public ArrayList<PersonaVinculada> buscarPorNombre(String nombre) {
+    public ArrayList<PersonaVinculada> buscarPorApellido(String apellido) {
         ArrayList<PersonaVinculada> personasEncontradas = new ArrayList<>();
 
-        if (nombre == null || nombre.trim().isEmpty()) {
+        if (apellido == null || apellido.trim().isEmpty()) {
             return personasEncontradas;
         }
 
-        String nombreBuscado = nombre.trim().toLowerCase();
+        String nombreBuscado = apellido.trim().toLowerCase();
 
         for (PersonaVinculada persona : personas) {
             if (persona.getNombre().toLowerCase().contains(nombreBuscado)) {

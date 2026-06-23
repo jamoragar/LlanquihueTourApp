@@ -36,9 +36,9 @@ public class Main {
         mostrarResultado(personaEncontrada);
 
         // Busqueda parcial por nombre o apellido (Soto).
-        System.out.println("\n===== BUSQUEDA POR NOMBRE: Soto =====");
-        ArrayList<PersonaVinculada> personasPorNombre = personaService.buscarPorNombre("Soto");
-        mostrarLista(personasPorNombre);
+        System.out.println("\n===== BUSQUEDA POR APELLIDO: Soto =====");
+        ArrayList<PersonaVinculada> personasPorApellido = personaService.buscarPorApellido("Soto");
+        mostrarLista(personasPorApellido);
 
         // Filtro por tipo de persona vinculada.
         System.out.println("\n===== FILTRO: GUIAS =====");
