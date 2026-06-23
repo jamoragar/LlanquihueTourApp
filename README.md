@@ -50,8 +50,6 @@ LlanquihueTourApp/
 |-- resources/
 |   |-- personas.txt
 |   `-- tours.txt
-|-- docs/
-|   `-- guion-video.md
 |-- build.xml
 |-- manifest.mf
 `-- nbproject/
