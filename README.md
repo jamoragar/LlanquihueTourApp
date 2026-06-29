@@ -1,31 +1,32 @@
 # LlanquihueTourApp
 
-Aplicación Java de consola para gestionar personas vinculadas a la agencia Llanquihue Tour. El sistema carga datos desde un archivo externo, crea objetos, los almacena en un `ArrayList` y permite mostrar, buscar y filtrar registros por consola.
+Aplicación Java de consola para modelar servicios turísticos de Llanquihue Tour mediante herencia simple y composición entre clases.
 
 ## Datos del Autor
 
 - Nombre: Javier A. Moraga Rojas
 - Carrera: Analista Programador Computacional
 - Asignatura: Desarrollo Orientado a Objetos I
-- Fecha de entrega: 22/06/2026
+- Iteración: 3.1, creando jerarquías de clases con herencia simple
+- Fecha de entrega: 29/06/2026
+
+## Objetivo
+
+Implementar una jerarquía de clases que represente distintos servicios turísticos ofrecidos por Llanquihue Tour. La solución utiliza una superclase con atributos comunes, subclases con atributos propios y una clase compuesta para representar la ubicación de cada servicio.
 
 ## Problemática
 
-Llanquihue Tour trabaja con guías turísticos, operadores y proveedores locales. El crecimiento de la agencia requiere una herramienta simple que permita consultar datos, evitar duplicados, validar información y automatizar búsquedas básicas.
+Llanquihue Tour ofrece rutas gastronómicas, paseos lacustres y excursiones culturales. Estos servicios comparten datos como nombre, duración y ubicación, pero cada categoría necesita información específica. Usar una sola clase generaría duplicidad y dificultaría la ampliación del sistema.
 
 ## Funcionalidades Implementadas
 
-- Organización del código en paquetes funcionales.
-- Lectura de personas desde `resources/personas.txt`.
-- Carga de objetos en `ArrayList<PersonaVinculada>`.
-- Composición entre `PersonaVinculada` y `Contacto`.
-- Composición entre `PersonaVinculada` y `Direccion`.
-- Validación de archivo inexistente o vacío.
-- Validación de registros con campos incompletos o datos inválidos.
-- Detección de ID duplicado.
-- Búsqueda por ID.
-- Búsqueda por nombre.
-- Filtro por tipo de persona.
+- Superclase `ServicioTuristico` con atributos comunes.
+- Subclases `RutaGastronomica`, `PaseoLacustre` y `ExcursionCultural`.
+- Composición entre `ServicioTuristico` y `UbicacionServicio`.
+- Constructores con uso de `super(nombre, duracionHoras)`.
+- Sobrescritura de `toString()` con `@Override`.
+- Validaciones simples en setters para evitar datos vacíos o inválidos.
+- Creación de datos de prueba desde `GestorServicios`.
 - Salida clara por consola desde `ui.Main`.
 
 ## Estructura del Proyecto
@@ -35,12 +36,18 @@ LlanquihueTourApp/
 |-- src/
 |   |-- data/
 |   |   |-- GestorArchivo.java
-|   |   `-- GestorDatos.java
+|   |   |-- GestorDatos.java
+|   |   `-- GestorServicios.java
 |   |-- model/
 |   |   |-- Contacto.java
 |   |   |-- Direccion.java
+|   |   |-- ExcursionCultural.java
+|   |   |-- PaseoLacustre.java
 |   |   |-- PersonaVinculada.java
-|   |   `-- Tour.java
+|   |   |-- RutaGastronomica.java
+|   |   |-- ServicioTuristico.java
+|   |   |-- Tour.java
+|   |   `-- UbicacionServicio.java
 |   |-- service/
 |   |   `-- PersonaService.java
 |   |-- ui/
@@ -55,55 +62,64 @@ LlanquihueTourApp/
 `-- nbproject/
 ```
 
+## Clases Creadas
 
-## Clases Principales
+- `UbicacionServicio`: representa la comuna y el punto de encuentro de un servicio turístico.
+- `ServicioTuristico`: superclase con `nombre`, `duracionHoras` y una `UbicacionServicio` compuesta.
+- `RutaGastronomica`: subclase con el atributo específico `numeroDeParadas`.
+- `PaseoLacustre`: subclase con el atributo específico `tipoEmbarcacion`.
+- `ExcursionCultural`: subclase con el atributo específico `lugarHistorico`.
+- `GestorServicios`: crea servicios de prueba para demostrar la ejecución.
+- `Main`: ejecuta la iteración y muestra los servicios por consola.
 
-- `Contacto`: representa teléfono y email de una persona.
-- `PersonaVinculada`: representa guía, operador o proveedor. Contiene un objeto `Contacto` y un objeto `Direccion`, aplicando composición.
-- `Direccion`: representa la dirección asociada a una persona vinculada.
-- `GestorArchivo`: lee `resources/personas.txt`, valida cada línea y crea objetos válidos.
-- `ValidadorDatos`: centraliza reglas de validación para texto, tipo, email, teléfono e ID.
-- `PersonaService`: administra la colección y entrega operaciones de listado, búsqueda y filtro.
-- `Main`: ejecuta la carga, muestra los registros, realiza búsquedas y filtra guías.
-- `Tour` y `GestorDatos`: se conservan como parte de la iteración anterior del proyecto.
-
-## Archivo de Datos
-
-Ubicación:
+## Jerarquía de Herencia
 
 ```text
-resources/personas.txt
+ServicioTuristico
+|-- RutaGastronomica
+|-- PaseoLacustre
+`-- ExcursionCultural
 ```
 
-Formato obligatorio:
+Las subclases reutilizan los atributos comunes definidos en `ServicioTuristico` y agregan un atributo propio según el tipo de servicio turístico.
 
-```text
-id;nombre;tipo;comuna;calle;numero;telefono;email
+## Composición
+
+La clase `ServicioTuristico` contiene un atributo privado de tipo `UbicacionServicio`:
+
+```java
+private UbicacionServicio ubicacion;
 ```
 
-Ejemplo:
+Esto permite asociar cada servicio turístico a una comuna y un punto de encuentro sin duplicar esos datos en cada subclase.
 
-```text
-1;Ana Soto;guia;Puerto Varas;San Francisco;245;987654321;ana.soto@email.cl
+## Uso de super(...)
+
+Cada subclase llama al constructor de la superclase para inicializar los atributos heredados:
+
+```java
+super(nombre, duracionHoras);
 ```
 
-Reglas del archivo:
+Luego se asigna la ubicación mediante `setUbicacion(ubicacion)` y se valida el atributo específico de la subclase.
 
-- Cada línea debe tener exactamente 8 campos.
-- El separador debe ser punto y coma `;`.
-- El ID debe ser numérico, positivo y único.
-- El tipo debe ser `guia`, `operador` o `proveedor`.
-- Nombre, comuna, calle, teléfono y email no pueden estar vacíos.
-- El número de la dirección debe ser numérico y mayor que cero.
-- El teléfono debe contener solo dígitos.
-- El email debe contener `@` y dominio.
+## Uso de @Override y toString()
+
+Cada subclase sobrescribe `toString()` para mostrar la información heredada y su atributo específico. Por ejemplo, `RutaGastronomica` muestra nombre, duración, ubicación y número de paradas.
+
+## Validaciones
+
+- `nombre`, `comuna`, `puntoEncuentro`, `tipoEmbarcacion` y `lugarHistorico` no pueden quedar vacíos.
+- `duracionHoras` debe ser mayor que cero.
+- `numeroDeParadas` debe ser mayor que cero.
+- `ubicacion` no puede quedar en `null`.
+- Cuando un dato no es válido, se informa por consola y se asigna un valor por defecto.
 
 ## Requisitos para Ejecutar
 
 - Java JDK instalado.
 - NetBeans o una terminal con Apache Ant disponible.
-- No requiere base de datos ni frameworks externos.
-- No requiere Maven ni Gradle.
+- No requiere base de datos, Maven, Gradle ni frameworks externos.
 
 ## Ejecución en NetBeans
 
@@ -121,51 +137,24 @@ Desde la carpeta del proyecto:
 ant run
 ```
 
-También se puede compilar con:
-
-```bash
-ant clean jar
-```
-
-## Instrucciones para Clonar
-
-```bash
-git clone https://github.com/USUARIO/LlanquihueTourApp.git
-cd LlanquihueTourApp
-```
-
-Luego abrir el proyecto en NetBeans o ejecutar `ant run` desde terminal.
-
 ## Ejemplo de Salida Esperada
 
 ```text
-===== PERSONAS VINCULADAS A LLANQUIHUE TOUR =====
-ID: 1 | Nombre: Ana Soto | Tipo: guia | Comuna: Puerto Varas
-Contacto: Telefono: 987654321 | Email: ana.soto@email.cl
-Direccion: San Francisco #245, Puerto Varas, Región de Los Lagos
+===== SERVICIOS TURÍSTICOS LLANQUIHUE TOUR =====
 
-===== BUSQUEDA POR ID: 3 =====
-ID: 3 | Nombre: Maria Perez | Tipo: proveedor | Comuna: Frutillar
-Contacto: Telefono: 965432109 | Email: maria.perez@email.cl
-Direccion: Vicente Perez Rosales #560, Frutillar, Región de Los Lagos
+Ruta Gastronómica: Nombre: Ruta Sabores del Lago | Duración: 3.5 horas | Ubicación: Llanquihue - Costanera | Número de paradas: 4
 
-===== BUSQUEDA POR NOMBRE: Soto =====
-ID: 1 | Nombre: Ana Soto | Tipo: guia | Comuna: Puerto Varas
-Contacto: Telefono: 987654321 | Email: ana.soto@email.cl
-Direccion: San Francisco #245, Puerto Varas, Región de Los Lagos
+Ruta Gastronómica: Nombre: Experiencia Cerveza Artesanal | Duración: 2.0 horas | Ubicación: Puerto Varas - Cervecería local | Número de paradas: 3
 
-ID: 10 | Nombre: Felipe Soto | Tipo: guia | Comuna: Llanquihue
-Contacto: Telefono: 978765432 | Email: felipe.soto@email.cl
-Direccion: Erardo Werner #72, Llanquihue, Región de Los Lagos
+Paseo Lacustre: Nombre: Navegación Lago Llanquihue | Duración: 2.5 horas | Ubicación: Puerto Varas - Muelle turístico | Tipo de embarcación: Catamarán
 
-===== FILTRO: GUIAS =====
-ID: 1 | Nombre: Ana Soto | Tipo: guia | Comuna: Puerto Varas
-Contacto: Telefono: 987654321 | Email: ana.soto@email.cl
-Direccion: San Francisco #245, Puerto Varas, Región de Los Lagos
+Paseo Lacustre: Nombre: Paseo Isla Loreley | Duración: 1.5 horas | Ubicación: Frutillar - Muelle patrimonial | Tipo de embarcación: Lancha
+
+Excursión Cultural: Nombre: Circuito Patrimonial Frutillar | Duración: 2.0 horas | Ubicación: Frutillar - Teatro del Lago | Lugar histórico: Teatro del Lago
+
+Excursión Cultural: Nombre: Tour Colonización Alemana | Duración: 3.0 horas | Ubicación: Frutillar - Museo Colonial Alemán | Lugar histórico: Museo Colonial Alemán
 ```
 
-Si no hay coincidencias, el sistema muestra:
+## Observación
 
-```text
-No se encontraron personas para la busqueda solicitada.
-```
+Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración.

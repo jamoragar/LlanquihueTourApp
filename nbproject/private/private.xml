@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/javiermoroga/Downloads/Semana%204/LlanquihueTourApp/src/ui/Main.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%204/LlanquihueTourApp/src/model/Tour.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%204/LlanquihueTourApp/src/data/GestorDatos.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/data/GestorArchivo.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/service/PersonaService.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/util/ValidadorDatos.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/ui/Main.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/Contacto.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/Direccion.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/PersonaVinculada.java</file>
         </group>
     </open-files>
 </project-private>
