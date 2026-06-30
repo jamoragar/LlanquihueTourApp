@@ -7,7 +7,6 @@ Aplicación Java de consola para modelar servicios turísticos de Llanquihue Tou
 - Nombre: Javier A. Moraga Rojas
 - Carrera: Analista Programador Computacional
 - Asignatura: Desarrollo Orientado a Objetos I
-- Iteración: 3.1, creando jerarquías de clases con herencia simple
 - Fecha de entrega: 29/06/2026
 
 ## Objetivo
@@ -83,29 +82,6 @@ ServicioTuristico
 
 Las subclases reutilizan los atributos comunes definidos en `ServicioTuristico` y agregan un atributo propio según el tipo de servicio turístico.
 
-## Composición
-
-La clase `ServicioTuristico` contiene un atributo privado de tipo `UbicacionServicio`:
-
-```java
-private UbicacionServicio ubicacion;
-```
-
-Esto permite asociar cada servicio turístico a una comuna y un punto de encuentro sin duplicar esos datos en cada subclase.
-
-## Uso de super(...)
-
-Cada subclase llama al constructor de la superclase para inicializar los atributos heredados:
-
-```java
-super(nombre, duracionHoras);
-```
-
-Luego se asigna la ubicación mediante `setUbicacion(ubicacion)` y se valida el atributo específico de la subclase.
-
-## Uso de @Override y toString()
-
-Cada subclase sobrescribe `toString()` para mostrar la información heredada y su atributo específico. Por ejemplo, `RutaGastronomica` muestra nombre, duración, ubicación y número de paradas.
 
 ## Validaciones
 
@@ -136,25 +112,3 @@ Desde la carpeta del proyecto:
 ```bash
 ant run
 ```
-
-## Ejemplo de Salida Esperada
-
-```text
-===== SERVICIOS TURÍSTICOS LLANQUIHUE TOUR =====
-
-Ruta Gastronómica: Nombre: Ruta Sabores del Lago | Duración: 3.5 horas | Ubicación: Llanquihue - Costanera | Número de paradas: 4
-
-Ruta Gastronómica: Nombre: Experiencia Cerveza Artesanal | Duración: 2.0 horas | Ubicación: Puerto Varas - Cervecería local | Número de paradas: 3
-
-Paseo Lacustre: Nombre: Navegación Lago Llanquihue | Duración: 2.5 horas | Ubicación: Puerto Varas - Muelle turístico | Tipo de embarcación: Catamarán
-
-Paseo Lacustre: Nombre: Paseo Isla Loreley | Duración: 1.5 horas | Ubicación: Frutillar - Muelle patrimonial | Tipo de embarcación: Lancha
-
-Excursión Cultural: Nombre: Circuito Patrimonial Frutillar | Duración: 2.0 horas | Ubicación: Frutillar - Teatro del Lago | Lugar histórico: Teatro del Lago
-
-Excursión Cultural: Nombre: Tour Colonización Alemana | Duración: 3.0 horas | Ubicación: Frutillar - Museo Colonial Alemán | Lugar histórico: Museo Colonial Alemán
-```
-
-## Observación
-
-Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración.
