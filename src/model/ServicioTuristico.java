@@ -66,6 +66,10 @@ public class ServicioTuristico {
         }
     }
 
+    public String mostrarInformacion() {
+        return toString();
+    }
+
     @Override
     public String toString() {
         return "Nombre: " + nombre +

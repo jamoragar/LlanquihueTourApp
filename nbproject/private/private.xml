@@ -3,13 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/data/GestorArchivo.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/service/PersonaService.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/util/ValidadorDatos.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/ui/Main.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/Contacto.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/Direccion.java</file>
-            <file>file:/Users/javiermoroga/Downloads/Semana%205/LlanquihueTourApp/src/model/PersonaVinculada.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/ui/Main.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/util/ValidadorDatos.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/service/PersonaService.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/Contacto.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/Direccion.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/ExcursionCultural.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/PaseoLacustre.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/RutaGastronomica.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/ServicioTuristico.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/Tour.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/model/UbicacionServicio.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/data/GestorArchivo.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/data/GestorDatos.java</file>
+            <file>file:/Users/javiermoroga/Downloads/Semana%206/LlanquihueTourApp/src/data/GestorServicios.java</file>
         </group>
     </open-files>
 </project-private>
