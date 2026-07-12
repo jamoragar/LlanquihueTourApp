@@ -105,7 +105,7 @@ LlanquihueTourApp/
 `-- nbproject/
 ```
 
-## Ejecución
+## Clases de Continuidad
 
 - `UbicacionServicio`: representa la comuna y el punto de encuentro de un servicio turístico.
 - `ServicioTuristico`: superclase con `nombre`, `duracionHoras` y una `UbicacionServicio` compuesta.
@@ -113,9 +113,9 @@ LlanquihueTourApp/
 - `PaseoLacustre`: subclase con el atributo específico `tipoEmbarcacion`.
 - `ExcursionCultural`: subclase con el atributo específico `lugarHistorico`.
 - `GestorServicios`: gestiona una lista polimórfica de servicios, carga datos de prueba y muestra la información por consola.
-- `Main`: ejecuta mostrando los servicios turísticos.
+- `ui.Main`: inicia la GUI de registro de entidades.
 
-## Jerarquía de Herencia
+## Jerarquía de Servicios Turísticos
 
 ```text
 ServicioTuristico
@@ -127,13 +127,13 @@ ServicioTuristico
 Las subclases reutilizan los atributos comunes definidos en `ServicioTuristico` y agregan un atributo propio según el tipo de servicio turístico.
 
 
-## Requisitos para Ejecutar
+## Requisitos de Ejecución
 
 - Java JDK instalado.
 - NetBeans o una terminal con Apache Ant disponible.
 - No requiere base de datos, Maven, Gradle ni frameworks externos.
 
-## Ejecución en NetBeans
+## Ejecución
 La clase principal es `ui.Main`.
 
 ### Desde NetBeans
@@ -156,7 +156,7 @@ Se requiere Java JDK y Apache Ant. El proyecto no usa base de datos ni dependenc
 
 ## Observación
 
-Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración. El recorrido principal no usa `instanceof`; la información específica se obtiene mediante sobrescritura y polimorfismo.
+Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración. El recorrido actual usa polimorfismo mediante `mostrarResumen()` y diferencia las entidades con `instanceof` desde `GestorEntidades`.
 
 ## Ejemplo de Uso
 
