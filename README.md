@@ -1,6 +1,6 @@
 # LlanquihueTourApp
 
-Aplicación Java de consola para modelar servicios turísticos de Llanquihue Tour mediante herencia, composición, polimorfismo y colecciones genéricas.
+Aplicación Java con GUI básica para gestionar recursos y servicios de la agencia Llanquihue Tour.
 
 ## Datos del Autor
 
@@ -8,30 +8,76 @@ Aplicación Java de consola para modelar servicios turísticos de Llanquihue Tou
 - Carrera: Analista Programador Computacional
 - Asignatura: Desarrollo Orientado a Objetos I
 - Fecha de entrega: 05/07/2026
- 
+- Versión activa evaluada: Semana 8
 
-## Objetivo
+## Descripción
 
-Implementar una versión polimórfica del sistema de servicios turísticos ofrecidos por Llanquihue Tour. La solución utiliza una superclase con atributos comunes, subclases con atributos propios, una clase compuesta para representar la ubicación y una colección `List<ServicioTuristico>` para gestionar distintos servicios desde una misma referencia base.
+Esta iteración amplía el sistema de servicios turísticos de Llanquihue Tour. Ahora permite registrar guías turísticos, vehículos, colaboradores externos y servicios turísticos dentro de una misma colección dinámica. La interfaz gráfica permite ingresar nuevas entidades y revisar todos los registros sin usar la consola.
 
-## Problemática
+## Problemática Abordada
 
-Llanquihue Tour ofrece rutas gastronómicas, paseos lacustres y excursiones culturales. Estos servicios comparten datos como nombre, duración y ubicación, pero cada categoría necesita información específica. Además, la agencia necesita recorrerlos de forma dinámica desde una misma colección, sin depender de arreglos separados ni condicionales por tipo para mostrar la información principal.
+La agencia necesitaba administrar entidades operativas distintas que no comparten una misma clase padre con los servicios turísticos. La solución usa una interfaz común para tratarlas de forma unificada, conserva las jerarquías existentes y diferencia el tipo real de cada objeto al mostrarlo.
 
-## Funcionalidades Implementadas
+## Clases e Interfaces Principales
 
-- Superclase `ServicioTuristico` con atributos comunes.
-- Subclases `RutaGastronomica`, `PaseoLacustre` y `ExcursionCultural`.
-- Composición entre `ServicioTuristico` y `UbicacionServicio`.
-- Constructores con uso de `super(nombre, duracionHoras)`.
-- Sobrescritura de `toString()` con `@Override`.
-- Método `mostrarInformacion()` en la superclase y sobrescrito en cada subclase.
-- Colección polimórfica `List<ServicioTuristico>` en `GestorServicios`.
-- Recorrido con bucle `for-each` invocando `mostrarInformacion()` desde referencias `ServicioTuristico`.
-- Sobrecarga de métodos en `GestorServicios` mediante `mostrarServicios()` y `mostrarServicios(String titulo)`.
-- Validaciones simples en setters para evitar datos vacíos o inválidos.
-- Creación de datos de prueba desde `GestorServicios`.
-- Salida clara por consola desde `ui.Main`.
+- `Registrable`: contrato común que declara `mostrarResumen()`.
+- `RecursoAgencia`: superclase con los atributos comunes `id` y `nombre`.
+- `GuiaTuristico`: hereda de `RecursoAgencia` e implementa `Registrable`.
+- `Vehiculo`: hereda de `RecursoAgencia` e implementa `Registrable`.
+- `ColaboradorExterno`: hereda de `RecursoAgencia` e implementa `Registrable`.
+- `ServicioTuristico`: mantiene la jerarquía anterior e implementa `Registrable`.
+- `RutaGastronomica`, `PaseoLacustre` y `ExcursionCultural`: subclases de `ServicioTuristico`.
+- `GestorEntidades`: administra los registros mediante `ArrayList<Registrable>`.
+- `VentanaRegistro`: GUI Swing para ingresar y visualizar entidades.
+- `ui.Main`: clase principal.
+
+## Herencia
+
+```text
+RecursoAgencia
+|-- GuiaTuristico
+|-- Vehiculo
+`-- ColaboradorExterno
+
+ServicioTuristico
+|-- RutaGastronomica
+|-- PaseoLacustre
+`-- ExcursionCultural
+```
+
+Las tres subclases de `RecursoAgencia` reutilizan el identificador y el nombre. La jerarquía de servicios turísticos se mantiene como continuidad de las iteraciones anteriores.
+
+## Registrable y mostrarResumen()
+
+La interfaz `Registrable` define un comportamiento común para cualquier entidad que pueda almacenarse en el registro:
+
+```java
+public interface Registrable {
+    String mostrarResumen();
+}
+```
+
+Cada clase implementa `mostrarResumen()` con los datos relevantes para personal no técnico. Por ejemplo, un guía turístico muestra idioma y años de experiencia, mientras que un vehículo muestra patente y capacidad.
+
+## Colección Polimórfica e instanceof
+
+`GestorEntidades` declara la colección central de la aplicación:
+
+```java
+private ArrayList<Registrable> registros;
+```
+
+La lista puede almacenar objetos de distintas clases porque todos cumplen el contrato `Registrable`. Durante el recorrido se invoca `mostrarResumen()` desde la referencia común y se usa `instanceof` para mostrar una categoría específica para `GuiaTuristico`, `Vehiculo`, `ColaboradorExterno` o `ServicioTuristico`.
+
+## GUI
+
+La clase `ui.VentanaRegistro` usa Swing y ofrece un formulario con los siguientes tipos:
+
+- Guía turístico.
+- Vehículo.
+- Colaborador externo.
+
+La ventana valida campos vacíos y datos numéricos antes de crear el objeto. Los botones permiten agregar entidades, mostrar el resumen de registros, limpiar los campos y salir de forma confirmada. Al iniciar se cargan datos de prueba de los distintos tipos para evidenciar la colección polimórfica.
 
 ## Estructura del Proyecto
 
@@ -39,34 +85,27 @@ Llanquihue Tour ofrece rutas gastronómicas, paseos lacustres y excursiones cult
 LlanquihueTourApp/
 |-- src/
 |   |-- data/
-|   |   |-- GestorArchivo.java
-|   |   |-- GestorDatos.java
+|   |   |-- GestorEntidades.java
 |   |   `-- GestorServicios.java
 |   |-- model/
-|   |   |-- Contacto.java
-|   |   |-- Direccion.java
-|   |   |-- ExcursionCultural.java
-|   |   |-- PaseoLacustre.java
-|   |   |-- PersonaVinculada.java
-|   |   |-- RutaGastronomica.java
+|   |   |-- Registrable.java
+|   |   |-- RecursoAgencia.java
+|   |   |-- GuiaTuristico.java
+|   |   |-- Vehiculo.java
+|   |   |-- ColaboradorExterno.java
 |   |   |-- ServicioTuristico.java
-|   |   |-- Tour.java
-|   |   `-- UbicacionServicio.java
-|   |-- service/
-|   |   `-- PersonaService.java
-|   |-- ui/
-|   |   `-- Main.java
-|   `-- util/
-|       `-- ValidadorDatos.java
-|-- resources/
-|   |-- personas.txt
-|   `-- tours.txt
+|   |   |-- RutaGastronomica.java
+|   |   |-- PaseoLacustre.java
+|   |   `-- ExcursionCultural.java
+|   `-- ui/
+|       |-- Main.java
+|       `-- VentanaRegistro.java
 |-- build.xml
 |-- manifest.mf
 `-- nbproject/
 ```
 
-## Clases Creadas
+## Ejecución
 
 - `UbicacionServicio`: representa la comuna y el punto de encuentro de un servicio turístico.
 - `ServicioTuristico`: superclase con `nombre`, `duracionHoras` y una `UbicacionServicio` compuesta.
@@ -95,23 +134,43 @@ Las subclases reutilizan los atributos comunes definidos en `ServicioTuristico` 
 - No requiere base de datos, Maven, Gradle ni frameworks externos.
 
 ## Ejecución en NetBeans
+La clase principal es `ui.Main`.
+
+### Desde NetBeans
 
 1. Abrir NetBeans.
 2. Seleccionar `File > Open Project`.
 3. Abrir la carpeta `LlanquihueTourApp`.
-4. Verificar que la clase principal sea `ui.Main`.
+4. Verificar que la clase principal configurada sea `ui.Main`.
 5. Ejecutar el proyecto.
 
-## Ejecución desde Terminal
+### Desde Terminal
 
-Desde la carpeta del proyecto:
+Desde la carpeta del proyecto ejecutar:
 
 ```bash
 ant run
 ```
 
-La clase principal configurada para la ejecución es `ui.Main`.
+Se requiere Java JDK y Apache Ant. El proyecto no usa base de datos ni dependencias externas.
 
 ## Observación
 
 Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración. El recorrido principal no usa `instanceof`; la información específica se obtiene mediante sobrescritura y polimorfismo.
+
+## Ejemplo de Uso
+
+1. Seleccionar `Guía turístico` en el formulario.
+2. Ingresar ID `5`, nombre `Paula Díaz`, idioma `Portugués` y experiencia `3`.
+3. Presionar `Agregar entidad`.
+4. Presionar `Mostrar registros` para ver el resumen y la categoría detectada con `instanceof`.
+
+Ejemplo de salida:
+
+```text
+Guía turístico: Camila Soto | Idioma: Inglés | Experiencia: 5 años
+Categoría: Guía turístico
+
+Vehículo: Van Ejecutiva | Patente: LL-2025 | Capacidad: 12 pasajeros
+Categoría: Vehículo
+```

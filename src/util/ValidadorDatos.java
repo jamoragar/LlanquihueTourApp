@@ -52,7 +52,7 @@ public class ValidadorDatos {
         int numero = Integer.parseInt(valor.trim());
 
         if (numero <= 0) {
-            throw new NumberFormatException("El numero debe ser mayor que cero");
+            throw new NumberFormatException("El número debe ser mayor que cero");
         }
 
         return numero;

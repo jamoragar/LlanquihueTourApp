@@ -10,26 +10,26 @@ import java.util.ArrayList;
 // Clase encargada de leer los datos desde un archivo de texto
 public class GestorDatos {
 
-    // Metodo que recibe la ruta del archivo y retorna una lista de tours
+    // Método que recibe la ruta del archivo y retorna una lista de tours
     public ArrayList<Tour> cargarTours(String rutaArchivo) {
 
-        // Lista dinamica donde se almacenaran los tours
+        // Lista dinámica donde se almacenarán los tours
         ArrayList<Tour> listaTours = new ArrayList<>();
 
         try {
             // Se abre el archivo para lectura
             BufferedReader lector = new BufferedReader(new FileReader(rutaArchivo));
 
-            // Lectura linea por linea
+            // Lectura línea por línea
             String linea;
 
-            // Se lee el archivo linea por linea
+            // Se lee el archivo línea por línea
             while ((linea = lector.readLine()) != null) {
 
-                // Se separa la linea usando punto y coma ;
+                // Se separa la línea usando punto y coma.
                 String[] partes = linea.split(";");
 
-                // Se valida que la linea tenga 4 datos
+                // Se valida que la línea tenga 4 datos
                 if (partes.length == 4) {
 
                     // Se convierten los datos al tipo correspondiente
@@ -38,7 +38,7 @@ public class GestorDatos {
                     String tipo = partes[2];
                     double precio = Double.parseDouble(partes[3]);
 
-                    // Se crea un objeto Tour con los datos leidos
+                // Se crea un objeto Tour con los datos leídos
                     Tour tour = new Tour(id, nombre, tipo, precio);
 
                     // Se agrega el objeto a la lista

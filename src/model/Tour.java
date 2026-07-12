@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa un tour turistico de la primera iteracion del proyecto.
+ * Representa un tour turístico de la primera iteración del proyecto.
  */
 public class Tour {
 
@@ -11,7 +11,7 @@ public class Tour {
     private double precio;
 
     /**
-     * Constructor vacio de la clase Tour.
+     * Constructor vacío de la clase Tour.
      */
     public Tour() {
     }
@@ -104,9 +104,9 @@ public class Tour {
     }
 
     /**
-     * Entrega la informacion del tour como texto.
+     * Entrega la información del tour como texto.
      *
-     * @return informacion formateada del tour
+     * @return información formateada del tour
      */
     @Override
     public String toString() {

@@ -20,7 +20,7 @@ public class GestorArchivo {
         File archivo = new File(rutaArchivo);
 
         if (!archivo.exists()) {
-            System.out.println("Error: no se encontro el archivo " + rutaArchivo);
+            System.out.println("Error: no se encontró el archivo " + rutaArchivo);
             return personas;
         }
 
@@ -37,14 +37,14 @@ public class GestorArchivo {
                 numeroLinea++;
 
                 if (linea.trim().isEmpty()) {
-                    System.out.println("Linea " + numeroLinea + " rechazada: registro vacio.");
+                    System.out.println("Línea " + numeroLinea + " rechazada: registro vacío.");
                     continue;
                 }
 
                 String[] datos = linea.split(";", -1);
 
                 if (datos.length != 8) {
-                    System.out.println("Linea " + numeroLinea + " rechazada: debe contener 8 campos.");
+                    System.out.println("Línea " + numeroLinea + " rechazada: debe contener 8 campos.");
                     continue;
                 }
 
@@ -59,7 +59,7 @@ public class GestorArchivo {
                     String email = datos[7].trim();
 
                     if (idsCargados.contains(id)) {
-                        System.out.println("Linea " + numeroLinea + " rechazada: ID duplicado " + id + ".");
+                        System.out.println("Línea " + numeroLinea + " rechazada: ID duplicado " + id + ".");
                         continue;
                     }
 
@@ -69,7 +69,7 @@ public class GestorArchivo {
                             !ValidadorDatos.esTelefonoValido(telefono) ||
                             !ValidadorDatos.esEmailValido(email) ||
                             !ValidadorDatos.esTipoValido(tipo)) {
-                        System.out.println("Linea " + numeroLinea + " rechazada: datos invalidos.");
+                        System.out.println("Línea " + numeroLinea + " rechazada: datos inválidos.");
                         continue;
                     }
 
@@ -81,16 +81,16 @@ public class GestorArchivo {
                     idsCargados.add(id);
 
                 } catch (NumberFormatException e) {
-                    System.out.println("Linea " + numeroLinea + " rechazada: ID invalido. " + e.getMessage());
+                    System.out.println("Línea " + numeroLinea + " rechazada: ID inválido. " + e.getMessage());
                 }
             }
 
             if (personas.size() < 5) {
-                System.out.println("Aviso: se cargaron menos de 5 registros validos.");
+                System.out.println("Aviso: se cargaron menos de 5 registros válidos.");
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Error: no se encontro el archivo " + rutaArchivo);
+            System.out.println("Error: no se encontró el archivo " + rutaArchivo);
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }

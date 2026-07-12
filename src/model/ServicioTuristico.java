@@ -3,7 +3,7 @@ package model;
 /**
  * Clase base para los servicios turísticos de Llanquihue Tour.
  */
-public class ServicioTuristico {
+public class ServicioTuristico implements Registrable {
 
     private String nombre;
     private double duracionHoras;
@@ -68,6 +68,11 @@ public class ServicioTuristico {
 
     public String mostrarInformacion() {
         return toString();
+    }
+
+    @Override
+    public String mostrarResumen() {
+        return mostrarInformacion();
     }
 
     @Override

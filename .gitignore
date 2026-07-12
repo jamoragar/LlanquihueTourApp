@@ -1,0 +1,22 @@
+# Compiled Java output
+/build/
+/dist/
+*.class
+
+# NetBeans local and generated files
+/nbproject/private/
+/nbbuild/
+
+# IDE metadata
+/.idea/
+*.iml
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp

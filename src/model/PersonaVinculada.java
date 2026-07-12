@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa a una persona vinculada a la agencia, como guia, operador o proveedor.
+ * Representa a una persona vinculada a la agencia, como guía, operador o proveedor.
  */
 public class PersonaVinculada {
 
@@ -13,7 +13,7 @@ public class PersonaVinculada {
     private Direccion direccion;
 
     /**
-     * Constructor vacio de la clase PersonaVinculada.
+     * Constructor vacío de la clase PersonaVinculada.
      */
     public PersonaVinculada() {
     }
@@ -25,8 +25,8 @@ public class PersonaVinculada {
      * @param nombre nombre completo de la persona
      * @param tipo tipo de persona vinculada
      * @param comuna comuna asociada al registro
-     * @param contacto informacion de contacto de la persona
-     * @param direccion direccion asociada a la persona
+     * @param contacto información de contacto de la persona
+     * @param direccion dirección asociada a la persona
      */
     public PersonaVinculada(int id, String nombre, String tipo, String comuna, Contacto contacto, Direccion direccion) {
         this.id = id;
@@ -110,7 +110,7 @@ public class PersonaVinculada {
     }
 
     /**
-     * Obtiene la informacion de contacto de la persona.
+     * Obtiene la información de contacto de la persona.
      *
      * @return contacto registrado
      */
@@ -119,7 +119,7 @@ public class PersonaVinculada {
     }
 
     /**
-     * Asigna la informacion de contacto de la persona.
+     * Asigna la información de contacto de la persona.
      *
      * @param contacto contacto a registrar
      */
@@ -128,27 +128,27 @@ public class PersonaVinculada {
     }
 
     /**
-     * Obtiene la direccion asociada a la persona.
+     * Obtiene la dirección asociada a la persona.
      *
-     * @return direccion registrada
+     * @return dirección registrada
      */
     public Direccion getDireccion() {
         return direccion;
     }
 
     /**
-     * Asigna la direccion asociada a la persona.
+     * Asigna la dirección asociada a la persona.
      *
-     * @param direccion direccion a registrar
+     * @param direccion dirección a registrar
      */
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * Entrega la informacion completa de la persona como texto.
+     * Entrega la información completa de la persona como texto.
      *
-     * @return informacion formateada de la persona
+     * @return información formateada de la persona
      */
     @Override
     public String toString() {
@@ -157,6 +157,6 @@ public class PersonaVinculada {
                 " | Tipo: " + tipo +
                 " | Comuna: " + comuna +
                 "\nContacto: " + contacto +
-                "\nDireccion: " + direccion;
+                "\nDirección: " + direccion;
     }
 }

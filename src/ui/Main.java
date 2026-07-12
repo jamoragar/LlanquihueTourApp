@@ -1,13 +1,18 @@
 package ui;
 
-import data.GestorServicios;
+import data.GestorEntidades;
+import java.awt.EventQueue;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        GestorServicios gestorServicios = new GestorServicios();
-        gestorServicios.cargarServiciosPrueba();
-        gestorServicios.mostrarServicios();
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GestorEntidades gestorEntidades = new GestorEntidades();
+                gestorEntidades.cargarDatosPrueba();
+                new VentanaRegistro(gestorEntidades).setVisible(true);
+            }
+        });
     }
 }

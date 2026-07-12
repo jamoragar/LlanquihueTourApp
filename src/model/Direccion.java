@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa la direccion asociada a una persona vinculada.
+ * Representa la dirección asociada a una persona vinculada.
  */
 public class Direccion {
 
@@ -11,7 +11,7 @@ public class Direccion {
     private String region;
 
     /**
-     * Constructor vacio de la clase Direccion.
+     * Constructor vacío de la clase Direccion.
      */
     public Direccion() {
     }
@@ -20,9 +20,9 @@ public class Direccion {
      * Constructor de la clase Direccion.
      *
      * @param calle nombre de la calle
-     * @param numero numero de la dirección
+     * @param numero número de la dirección
      * @param ciudad ciudad de la dirección
-     * @param region region de la dirección
+     * @param region región de la dirección
      */
     public Direccion(String calle, int numero, String ciudad, String region) {
         this.calle = calle;
@@ -97,7 +97,7 @@ public class Direccion {
     /**
      * Asigna la región de la dirección.
      *
-     * @param region region a registrar
+     * @param region región a registrar
      */
     public void setRegion(String region) {
         this.region = region;

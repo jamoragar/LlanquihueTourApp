@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Representa la informacion de contacto de una persona vinculada.
+ * Representa la información de contacto de una persona vinculada.
  */
 public class Contacto {
 
@@ -9,7 +9,7 @@ public class Contacto {
     private String email;
 
     /**
-     * Constructor vacio de la clase Contacto.
+     * Constructor vacío de la clase Contacto.
      */
     public Contacto() {
     }
@@ -17,8 +17,8 @@ public class Contacto {
     /**
      * Constructor de la clase Contacto.
      *
-     * @param telefono telefono de contacto
-     * @param email correo electronico de contacto
+     * @param telefono teléfono de contacto
+     * @param email correo electrónico de contacto
      */
     public Contacto(String telefono, String email) {
         this.telefono = telefono;
@@ -26,25 +26,25 @@ public class Contacto {
     }
 
     /**
-     * Obtiene el telefono de contacto.
+     * Obtiene el teléfono de contacto.
      *
-     * @return telefono registrado
+     * @return teléfono registrado
      */
     public String getTelefono() {
         return telefono;
     }
 
     /**
-     * Asigna el telefono de contacto.
+     * Asigna el teléfono de contacto.
      *
-     * @param telefono telefono a registrar
+     * @param telefono teléfono a registrar
      */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
     /**
-     * Obtiene el correo electronico de contacto.
+     * Obtiene el correo electrónico de contacto.
      *
      * @return email registrado
      */
@@ -53,7 +53,7 @@ public class Contacto {
     }
 
     /**
-     * Asigna el correo electronico de contacto.
+     * Asigna el correo electrónico de contacto.
      *
      * @param email email a registrar
      */
@@ -62,12 +62,12 @@ public class Contacto {
     }
 
     /**
-     * Entrega la informacion de contacto como texto.
+     * Entrega la información de contacto como texto.
      *
-     * @return informacion formateada del contacto
+     * @return información formateada del contacto
      */
     @Override
     public String toString() {
-        return "Telefono: " + telefono + " | Email: " + email;
+        return "Teléfono: " + telefono + " | Email: " + email;
     }
 }
