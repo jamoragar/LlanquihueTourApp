@@ -1,0 +1,3 @@
+id;rut;nombre;telefono;correo;calle;numero;comuna;razonSocial;tipoServicio
+P001;22222222-2;María Ríos;955555555;maria.rios@email.cl;Vicente Pérez;45;Puerto Montt;Transportes Sur;Transporte
+P002;44444444-4;Luis Vera;944444444;luis.vera@email.cl;Los Colonos;78;Puerto Octay;Sabores del Sur;Alimentación

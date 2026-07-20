@@ -1,0 +1,3 @@
+id;rut;nombre;telefono;correo;calle;numero;comuna;idiomas;aniosExperiencia
+G001;11111111-1;Carlos Soto;987654321;carlos.soto@email.cl;Costanera;85;Puerto Varas;Español-inglés;6
+G002;33333333-3;Paula Díaz;976543210;paula.diaz@email.cl;Imperial;310;Frutillar;Español-portugués;4

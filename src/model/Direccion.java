@@ -1,115 +1,58 @@
 package model;
 
+import utils.ValidadorDatos;
+
 /**
- * Representa la dirección asociada a una persona vinculada.
+ * Domicilio reutilizable de una persona.
  */
-public class Direccion {
+public final class Direccion {
 
     private String calle;
     private int numero;
-    private String ciudad;
+    private String comuna;
     private String region;
 
-    /**
-     * Constructor vacío de la clase Direccion.
-     */
-    public Direccion() {
+    public Direccion(String calle, int numero, String comuna, String region) {
+        setCalle(calle);
+        setNumero(numero);
+        setComuna(comuna);
+        setRegion(region);
     }
 
-    /**
-     * Constructor de la clase Direccion.
-     *
-     * @param calle nombre de la calle
-     * @param numero número de la dirección
-     * @param ciudad ciudad de la dirección
-     * @param region región de la dirección
-     */
-    public Direccion(String calle, int numero, String ciudad, String region) {
-        this.calle = calle;
-        this.numero = numero;
-        this.ciudad = ciudad;
-        this.region = region;
-    }
-
-    /**
-     * Obtiene la calle de la dirección.
-     *
-     * @return calle registrada
-     */
     public String getCalle() {
         return calle;
     }
 
-    /**
-     * Asigna la calle de la dirección.
-     *
-     * @param calle calle a registrar
-     */
     public void setCalle(String calle) {
-        this.calle = calle;
+        this.calle = ValidadorDatos.textoObligatorio(calle, "calle");
     }
 
-    /**
-     * Obtiene el número de la dirección.
-     *
-     * @return número registrado
-     */
     public int getNumero() {
         return numero;
     }
 
-    /**
-     * Asigna el número de la dirección.
-     *
-     * @param numero número a registrar
-     */
     public void setNumero(int numero) {
-        this.numero = numero;
+        this.numero = ValidadorDatos.enteroPositivo(numero, "número de dirección");
     }
 
-    /**
-     * Obtiene la ciudad de la dirección.
-     *
-     * @return ciudad registrada
-     */
-    public String getCiudad() {
-        return ciudad;
+    public String getComuna() {
+        return comuna;
     }
 
-    /**
-     * Asigna la ciudad de la dirección.
-     *
-     * @param ciudad ciudad a registrar
-     */
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setComuna(String comuna) {
+        this.comuna = ValidadorDatos.textoObligatorio(comuna, "comuna");
     }
 
-    /**
-     * Obtiene la región de la dirección.
-     *
-     * @return región registrada
-     */
     public String getRegion() {
         return region;
     }
 
-    /**
-     * Asigna la región de la dirección.
-     *
-     * @param region región a registrar
-     */
     public void setRegion(String region) {
-        this.region = region;
+        this.region = ValidadorDatos.textoObligatorio(region, "región");
     }
 
-    /**
-     * Entrega la dirección completa como texto.
-     *
-     * @return información formateada de la dirección
-     */
     @Override
     public String toString() {
-        return calle + " #" + numero + ", " + ciudad + ", Región de " + region;
+        return calle + " " + numero + ", " + comuna + ", " + region;
     }
 }

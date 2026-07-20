@@ -1,33 +1,41 @@
 package model;
 
-/**
- * Representa un guía turístico disponible para los servicios de la agencia.
- */
-public class GuiaTuristico extends RecursoAgencia implements Registrable {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import utils.ValidadorDatos;
 
-    private String idioma;
+/**
+ * Persona encargada de guiar experiencias turísticas.
+ */
+public final class GuiaTuristico extends Persona {
+
+    private final List<String> idiomas;
     private int aniosExperiencia;
 
-    public GuiaTuristico() {
-        this(1, "Sin información", "Sin información", 1);
-    }
-
-    public GuiaTuristico(int id, String nombre, String idioma, int aniosExperiencia) {
-        super(id, nombre);
-        setIdioma(idioma);
+    public GuiaTuristico(String id, String nombre, Rut rut, Direccion direccion,
+            String telefono, String correo, List<String> idiomas, int aniosExperiencia) {
+        super(id, nombre, rut, direccion, telefono, correo);
+        this.idiomas = new ArrayList<>();
+        setIdiomas(idiomas);
         setAniosExperiencia(aniosExperiencia);
     }
 
-    public String getIdioma() {
-        return idioma;
+    public List<String> getIdiomas() {
+        return Collections.unmodifiableList(new ArrayList<>(idiomas));
     }
 
-    public void setIdioma(String idioma) {
-        if (idioma != null && !idioma.trim().isEmpty()) {
-            this.idioma = idioma.trim();
-        } else {
-            this.idioma = "Sin información";
+    public void setIdiomas(List<String> idiomas) {
+        if (idiomas == null || idiomas.isEmpty()) {
+            throw new IllegalArgumentException("El guía debe indicar al menos un idioma.");
         }
+
+        List<String> idiomasValidados = new ArrayList<>();
+        for (String idioma : idiomas) {
+            idiomasValidados.add(ValidadorDatos.textoObligatorio(idioma, "idioma"));
+        }
+        this.idiomas.clear();
+        this.idiomas.addAll(idiomasValidados);
     }
 
     public int getAniosExperiencia() {
@@ -35,23 +43,19 @@ public class GuiaTuristico extends RecursoAgencia implements Registrable {
     }
 
     public void setAniosExperiencia(int aniosExperiencia) {
-        if (aniosExperiencia >= 0) {
-            this.aniosExperiencia = aniosExperiencia;
-        } else {
-            this.aniosExperiencia = 0;
-        }
+        this.aniosExperiencia = ValidadorDatos.enteroNoNegativo(
+                aniosExperiencia, "años de experiencia");
     }
 
     @Override
-    public String mostrarResumen() {
-        return "Guía turístico: " + getNombre()
-                + " | Idioma: " + idioma
-                + " | Experiencia: " + aniosExperiencia + " años";
+    public String mostrarDatos() {
+        return "Guía turístico | " + datosComunes() + " | Idiomas: " + idiomas
+                + " | Experiencia: " + aniosExperiencia
+                + (aniosExperiencia == 1 ? " año" : " años");
     }
 
     @Override
     public String toString() {
-        return super.toString() + " | Idioma: " + idioma
-                + " | Experiencia: " + aniosExperiencia + " años";
+        return mostrarDatos();
     }
 }

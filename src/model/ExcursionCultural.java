@@ -1,44 +1,38 @@
 package model;
 
+import utils.ValidadorDatos;
+
 /**
- * Servicio turístico orientado al patrimonio y la cultura local.
+ * Servicio dedicado al patrimonio y la historia local.
  */
-public class ExcursionCultural extends ServicioTuristico {
+public final class ExcursionCultural extends ServicioTuristico {
 
-    private String lugarHistorico;
+    private String enfoqueCultural;
 
-    public ExcursionCultural() {
-        super();
-        this.lugarHistorico = "Sin información";
+    public ExcursionCultural(String id, String nombre, String destino,
+            double precioBase, int cuposDisponibles, Itinerario itinerario,
+            String enfoqueCultural) {
+        super(id, nombre, destino, precioBase, cuposDisponibles, itinerario);
+        setEnfoqueCultural(enfoqueCultural);
     }
 
-    public ExcursionCultural(String nombre, double duracionHoras, UbicacionServicio ubicacion, String lugarHistorico) {
-        super(nombre, duracionHoras);
-        setUbicacion(ubicacion);
-        setLugarHistorico(lugarHistorico);
+    public String getEnfoqueCultural() {
+        return enfoqueCultural;
     }
 
-    public String getLugarHistorico() {
-        return lugarHistorico;
-    }
-
-    public void setLugarHistorico(String lugarHistorico) {
-        if (lugarHistorico != null && !lugarHistorico.trim().isEmpty()) {
-            this.lugarHistorico = lugarHistorico;
-        } else {
-            System.out.println("El lugar histórico no puede estar vacío. Se asigna valor por defecto.");
-            this.lugarHistorico = "Sin información";
-        }
+    public void setEnfoqueCultural(String enfoqueCultural) {
+        this.enfoqueCultural = ValidadorDatos.textoObligatorio(
+                enfoqueCultural, "enfoque cultural");
     }
 
     @Override
-    public String mostrarInformacion() {
-        return toString();
+    public String mostrarDatos() {
+        return "Excursión cultural | " + datosComunes()
+                + " | Enfoque: " + enfoqueCultural;
     }
 
     @Override
     public String toString() {
-        return "Excursión Cultural: " + super.toString() +
-                " | Lugar histórico: " + lugarHistorico;
+        return mostrarDatos();
     }
 }

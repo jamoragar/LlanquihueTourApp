@@ -1,0 +1,4 @@
+id;tipo;nombre;destino;precioBase;cupos;detalleEspecifico
+S001;GASTRONOMICA;Sabores del lago;Llanquihue;35000;12;Cocina local
+S002;LACUSTRE;Navegación por el lago Llanquihue;Puerto Varas;42000;10;Catamarán
+S003;CULTURAL;Patrimonio de Frutillar;Frutillar;28000;15;Colonización alemana

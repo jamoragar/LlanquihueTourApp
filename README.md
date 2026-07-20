@@ -1,176 +1,164 @@
 # LlanquihueTourApp
 
-Aplicación Java con GUI básica para gestionar recursos y servicios de la agencia Llanquihue Tour.
+- **Versión:** Evaluación Final Transversal
+- **Clase principal:** `app.Main`
+- **Fecha de entrega:** 19 de julio de 2026
 
-## Datos del Autor
+## Datos académicos
 
-- Nombre: Javier A. Moraga Rojas
+- Autor: Javier A. Moraga Rojas
 - Carrera: Analista Programador Computacional
 - Asignatura: Desarrollo Orientado a Objetos I
-- Fecha de entrega: 05/07/2026
-- Versión activa evaluada: Semana 8
+- Repositorio: <https://github.com/jamoragar/LlanquihueTourApp>
 
 ## Descripción
 
-Esta iteración amplía el sistema de servicios turísticos de Llanquihue Tour. Ahora permite registrar guías turísticos, vehículos, colaboradores externos y servicios turísticos dentro de una misma colección dinámica. La interfaz gráfica permite ingresar nuevas entidades y revisar todos los registros sin usar la consola.
+Llanquihue Tour administra excursiones, rutas gastronómicas y paseos lacustres. El prototipo reemplaza registros manuales por un modelo orientado a objetos que carga datos desde `resources/*.txt` y gestiona personas, servicios, itinerarios y reservas mediante una interfaz de consola con entradas validadas.
 
-## Problemática Abordada
+La aplicación no utiliza base de datos ni dependencias externas. Los errores recuperables relacionados con archivos o entradas se informan sin cerrar el programa, y cada fila válida se conserva aunque otra fila del mismo archivo sea defectuosa.
 
-La agencia necesitaba administrar entidades operativas distintas que no comparten una misma clase padre con los servicios turísticos. La solución usa una interfaz común para tratarlas de forma unificada, conserva las jerarquías existentes y diferencia el tipo real de cada objeto al mostrarlo.
-
-## Clases e Interfaces Principales
-
-- `Registrable`: contrato común que declara `mostrarResumen()`.
-- `RecursoAgencia`: superclase con los atributos comunes `id` y `nombre`.
-- `GuiaTuristico`: hereda de `RecursoAgencia` e implementa `Registrable`.
-- `Vehiculo`: hereda de `RecursoAgencia` e implementa `Registrable`.
-- `ColaboradorExterno`: hereda de `RecursoAgencia` e implementa `Registrable`.
-- `ServicioTuristico`: mantiene la jerarquía anterior e implementa `Registrable`.
-- `RutaGastronomica`, `PaseoLacustre` y `ExcursionCultural`: subclases de `ServicioTuristico`.
-- `GestorEntidades`: administra los registros mediante `ArrayList<Registrable>`.
-- `VentanaRegistro`: GUI Swing para ingresar y visualizar entidades.
-- `ui.Main`: clase principal.
-
-## Herencia
-
-```text
-RecursoAgencia
-|-- GuiaTuristico
-|-- Vehiculo
-`-- ColaboradorExterno
-
-ServicioTuristico
-|-- RutaGastronomica
-|-- PaseoLacustre
-`-- ExcursionCultural
-```
-
-Las tres subclases de `RecursoAgencia` reutilizan el identificador y el nombre. La jerarquía de servicios turísticos se mantiene como continuidad de las iteraciones anteriores.
-
-## Registrable y mostrarResumen()
-
-La interfaz `Registrable` define un comportamiento común para cualquier entidad que pueda almacenarse en el registro:
-
-```java
-public interface Registrable {
-    String mostrarResumen();
-}
-```
-
-Cada clase implementa `mostrarResumen()` con los datos relevantes para personal no técnico. Por ejemplo, un guía turístico muestra idioma y años de experiencia, mientras que un vehículo muestra patente y capacidad.
-
-## Colección Polimórfica e instanceof
-
-`GestorEntidades` declara la colección central de la aplicación:
-
-```java
-private ArrayList<Registrable> registros;
-```
-
-La lista puede almacenar objetos de distintas clases porque todos cumplen el contrato `Registrable`. Durante el recorrido se invoca `mostrarResumen()` desde la referencia común y se usa `instanceof` para mostrar una categoría específica para `GuiaTuristico`, `Vehiculo`, `ColaboradorExterno` o `ServicioTuristico`.
-
-## GUI
-
-La clase `ui.VentanaRegistro` usa Swing y ofrece un formulario con los siguientes tipos:
-
-- Guía turístico.
-- Vehículo.
-- Colaborador externo.
-
-La ventana valida campos vacíos y datos numéricos antes de crear el objeto. Los botones permiten agregar entidades, mostrar el resumen de registros, limpiar los campos y salir de forma confirmada. Al iniciar se cargan datos de prueba de los distintos tipos para evidenciar la colección polimórfica.
-
-## Estructura del Proyecto
+## Estructura
 
 ```text
 LlanquihueTourApp/
 |-- src/
+|   |-- app/
+|   |   `-- Main.java
 |   |-- data/
+|   |   |-- CargadorDatos.java
 |   |   |-- GestorEntidades.java
-|   |   `-- GestorServicios.java
+|   |   |-- GestorReservas.java
+|   |   |-- InformeCarga.java
+|   |   `-- Repositorio.java
+|   |-- exceptions/
+|   |   `-- RutInvalidoException.java
+|   |-- interfaces/
+|   |   |-- Identificable.java
+|   |   `-- Registrable.java
 |   |-- model/
-|   |   |-- Registrable.java
-|   |   |-- RecursoAgencia.java
-|   |   |-- GuiaTuristico.java
-|   |   |-- Vehiculo.java
-|   |   |-- ColaboradorExterno.java
-|   |   |-- ServicioTuristico.java
-|   |   |-- RutaGastronomica.java
-|   |   |-- PaseoLacustre.java
-|   |   `-- ExcursionCultural.java
-|   `-- ui/
-|       |-- Main.java
-|       `-- VentanaRegistro.java
+|   |   |-- Persona.java y sus subclases
+|   |   |-- ServicioTuristico.java y sus subclases
+|   |   `-- Rut, Direccion, Actividad, Itinerario y Reserva
+|   `-- utils/
+|       |-- LectorArchivos.java
+|       `-- ValidadorDatos.java
+|-- resources/
+|   |-- clientes.txt
+|   |-- guias.txt
+|   |-- proveedores.txt
+|   |-- servicios.txt
+|   `-- reservas.txt
 |-- build.xml
 |-- manifest.mf
 `-- nbproject/
 ```
 
-## Clases de Continuidad
+## Modelo y POO
 
-- `UbicacionServicio`: representa la comuna y el punto de encuentro de un servicio turístico.
-- `ServicioTuristico`: superclase con `nombre`, `duracionHoras` y una `UbicacionServicio` compuesta.
-- `RutaGastronomica`: subclase con el atributo específico `numeroDeParadas`.
-- `PaseoLacustre`: subclase con el atributo específico `tipoEmbarcacion`.
-- `ExcursionCultural`: subclase con el atributo específico `lugarHistorico`.
-- `GestorServicios`: gestiona una lista polimórfica de servicios, carga datos de prueba y muestra la información por consola.
-- `ui.Main`: inicia la GUI de registro de entidades.
+### Composición
 
-## Jerarquía de Servicios Turísticos
+- `Persona` contiene un `Rut` validado y una `Direccion`.
+- `Itinerario` encapsula una lista no modificable de objetos `Actividad`.
+- `ServicioTuristico` contiene su `Itinerario`.
+- `Reserva` referencia un `Cliente` y un `ServicioTuristico` sin duplicar sus datos.
+
+### Herencia
 
 ```text
+Persona
+|-- Cliente
+|-- GuiaTuristico
+`-- Proveedor
+
 ServicioTuristico
 |-- RutaGastronomica
 |-- PaseoLacustre
 `-- ExcursionCultural
 ```
 
-Las subclases reutilizan los atributos comunes definidos en `ServicioTuristico` y agregan un atributo propio según el tipo de servicio turístico.
+### Interfaces y polimorfismo
+
+`Registrable` declara `registrar()` y `mostrarDatos()`.
+`Identificable` declara `getId()` para desacoplar el repositorio de cada clase concreta. `GestorEntidades` reúne personas y servicios en una `List<Registrable>`, invoca `mostrarDatos()` polimórficamente y usa `instanceof` solo para indicar la categoría correspondiente al tipo real.
+
+### Sobrecarga de precio
+
+`ServicioTuristico` implementa y utiliza estas tres variantes:
+
+```java
+calcularPrecio();
+calcularPrecio(int cantidadPersonas);
+calcularPrecio(int cantidadPersonas, boolean incluyeTransporte);
+```
+
+`Reserva` utiliza la tercera firma para calcular su total. El gestor valida los cupos, los descuenta al crear la reserva y los repone al eliminarla.
+
+### Repositorio genérico
+
+`Repositorio<T extends Identificable>` es la estructura reutilizable del proyecto. Encapsula un `ArrayList<T>` para mantener el orden y un `HashMap<String, T>` para buscar por ID. Rechaza elementos nulos y duplicados, admite acceso por ID o índice, elimina de ambas estructuras y retorna listados no modificables.
+
+### Validación de RUT
+
+`Rut` admite el formato `12345678-5`, elimina los puntos, si están presentes, y valida la longitud y el dígito verificador mediante el módulo 11. Un valor inválido produce `RutInvalidoException`, tanto en el constructor como en sus setters.
+
+## Archivos de datos
+
+Todos los archivos utilizan UTF-8, separan campos con punto y coma y tienen un encabezado.
+
+```text
+clientes.txt
+id;rut;nombre;telefono;correo;calle;numero;comuna;preferencia
+
+guias.txt
+id;rut;nombre;telefono;correo;calle;numero;comuna;idiomas;aniosExperiencia
+
+proveedores.txt
+id;rut;nombre;telefono;correo;calle;numero;comuna;razonSocial;tipoServicio
+
+servicios.txt
+id;tipo;nombre;destino;precioBase;cupos;detalleEspecifico
+
+reservas.txt
+idReserva;idCliente;idServicio;fecha;cantidadPersonas
+```
+
+Las fechas de `reservas.txt` y las ingresadas desde la consola usan el formato `DD-MM-YYYY`, por ejemplo, `18-07-2026`.
+
+El orden de carga es el siguiente: clientes, guías, proveedores, servicios y reservas. Una reserva se omite si sus referencias no existen, si su fecha no es válida, si la cantidad de personas no es válida o si el servicio no dispone de cupos suficientes.
 
 
-## Requisitos de Ejecución
+## Requisitos
 
-- Java JDK instalado.
-- NetBeans o una terminal con Apache Ant disponible.
-- No requiere base de datos, Maven, Gradle ni frameworks externos.
+- JDK 21 o superior.
+- NetBeans con soporte para proyectos Java SE/Ant.
+- Apache Ant para ejecutar la aplicación desde la terminal.
 
-## Ejecución
-La clase principal es `ui.Main`.
+## Ejecución en NetBeans
 
-### Desde NetBeans
+1. Clonar o descargar el repositorio.
+2. Abrir NetBeans y seleccionar `File > Open Project`.
+3. Elegir la carpeta `LlanquihueTourApp`.
+4. Verificar que el proyecto utilice JDK 21 o superior.
+5. Ejecutar `Clean and Build Project`.
+6. Ejecutar el proyecto. La clase configurada es `app.Main`.
 
-1. Abrir NetBeans.
-2. Seleccionar `File > Open Project`.
-3. Abrir la carpeta `LlanquihueTourApp`.
-4. Verificar que la clase principal configurada sea `ui.Main`.
-5. Ejecutar el proyecto.
+La ruta `resources/` se resuelve de forma relativa a la raíz del proyecto. Para cargar los archivos, NetBeans debe usar esa carpeta como directorio de trabajo al ejecutar el proyecto, que es su configuración habitual.
 
-### Desde Terminal
-
-Desde la carpeta del proyecto ejecutar:
+## Ejecución desde terminal
 
 ```bash
+ant clean compile
 ant run
 ```
 
-Se requiere Java JDK y Apache Ant. El proyecto no usa base de datos ni dependencias externas.
+También puede compilarse manualmente:
 
-## Observación
-
-Las clases de iteraciones anteriores se conservan en el proyecto porque no interfieren con la ejecución principal de esta iteración. El recorrido actual usa polimorfismo mediante `mostrarResumen()` y diferencia las entidades con `instanceof` desde `GestorEntidades`.
-
-## Ejemplo de Uso
-
-1. Seleccionar `Guía turístico` en el formulario.
-2. Ingresar ID `5`, nombre `Paula Díaz`, idioma `Portugués` y experiencia `3`.
-3. Presionar `Agregar entidad`.
-4. Presionar `Mostrar registros` para ver el resumen y la categoría detectada con `instanceof`.
-
-Ejemplo de salida:
-
-```text
-Guía turístico: Camila Soto | Idioma: Inglés | Experiencia: 5 años
-Categoría: Guía turístico
-
-Vehículo: Van Ejecutiva | Patente: LL-2025 | Capacidad: 12 pasajeros
-Categoría: Vehículo
+```bash
+javac --release 21 -d build/manual-classes src/app/*.java src/data/*.java \
+  src/exceptions/*.java src/interfaces/*.java src/model/*.java src/utils/*.java
+java -cp build/manual-classes app.Main
 ```
+
+## Alcance
+
+El proyecto es un prototipo académico en memoria.

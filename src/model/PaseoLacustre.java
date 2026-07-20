@@ -1,20 +1,18 @@
 package model;
 
+import utils.ValidadorDatos;
+
 /**
- * Servicio turístico realizado en un entorno lacustre.
+ * Servicio de navegación por lagos de la zona.
  */
-public class PaseoLacustre extends ServicioTuristico {
+public final class PaseoLacustre extends ServicioTuristico {
 
     private String tipoEmbarcacion;
 
-    public PaseoLacustre() {
-        super();
-        this.tipoEmbarcacion = "Sin información";
-    }
-
-    public PaseoLacustre(String nombre, double duracionHoras, UbicacionServicio ubicacion, String tipoEmbarcacion) {
-        super(nombre, duracionHoras);
-        setUbicacion(ubicacion);
+    public PaseoLacustre(String id, String nombre, String destino,
+            double precioBase, int cuposDisponibles, Itinerario itinerario,
+            String tipoEmbarcacion) {
+        super(id, nombre, destino, precioBase, cuposDisponibles, itinerario);
         setTipoEmbarcacion(tipoEmbarcacion);
     }
 
@@ -23,22 +21,18 @@ public class PaseoLacustre extends ServicioTuristico {
     }
 
     public void setTipoEmbarcacion(String tipoEmbarcacion) {
-        if (tipoEmbarcacion != null && !tipoEmbarcacion.trim().isEmpty()) {
-            this.tipoEmbarcacion = tipoEmbarcacion;
-        } else {
-            System.out.println("El tipo de embarcación no puede estar vacío. Se asigna valor por defecto.");
-            this.tipoEmbarcacion = "Sin información";
-        }
+        this.tipoEmbarcacion = ValidadorDatos.textoObligatorio(
+                tipoEmbarcacion, "tipo de embarcación");
     }
 
     @Override
-    public String mostrarInformacion() {
-        return toString();
+    public String mostrarDatos() {
+        return "Paseo lacustre | " + datosComunes()
+                + " | Embarcación: " + tipoEmbarcacion;
     }
 
     @Override
     public String toString() {
-        return "Paseo Lacustre: " + super.toString() +
-                " | Tipo de embarcación: " + tipoEmbarcacion;
+        return mostrarDatos();
     }
 }

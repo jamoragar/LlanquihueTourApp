@@ -1,84 +1,139 @@
 package model;
 
+import interfaces.Identificable;
+import interfaces.Registrable;
+import utils.ValidadorDatos;
+
 /**
- * Clase base para los servicios turísticos de Llanquihue Tour.
+ * Base común para los servicios ofrecidos por Llanquihue Tour.
  */
-public class ServicioTuristico implements Registrable {
+public abstract class ServicioTuristico implements Registrable, Identificable {
 
+    private static final double TRANSPORTE_POR_PERSONA = 5_000;
+
+    private final String id;
     private String nombre;
-    private double duracionHoras;
-    private UbicacionServicio ubicacion;
+    private String destino;
+    private double precioBase;
+    private int cuposDisponibles;
+    private Itinerario itinerario;
+    private boolean registrado;
 
-    public ServicioTuristico() {
-        this.nombre = "Sin información";
-        this.duracionHoras = 1;
-        this.ubicacion = new UbicacionServicio();
+    protected ServicioTuristico(String id, String nombre, String destino,
+            double precioBase, int cuposDisponibles, Itinerario itinerario) {
+        this.id = ValidadorDatos.id(id);
+        setNombre(nombre);
+        setDestino(destino);
+        setPrecioBase(precioBase);
+        setCuposDisponibles(cuposDisponibles);
+        setItinerario(itinerario);
     }
 
-    public ServicioTuristico(String nombre, double duracionHoras) {
-        setNombre(nombre);
-        setDuracionHoras(duracionHoras);
-        this.ubicacion = new UbicacionServicio();
-    }
-
-    public ServicioTuristico(String nombre, double duracionHoras, UbicacionServicio ubicacion) {
-        setNombre(nombre);
-        setDuracionHoras(duracionHoras);
-        setUbicacion(ubicacion);
+    @Override
+    public String getId() {
+        return id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            this.nombre = nombre;
-        } else {
-            System.out.println("El nombre del servicio no puede estar vacío. Se asigna valor por defecto.");
-            this.nombre = "Sin información";
+    public final void setNombre(String nombre) {
+        this.nombre = ValidadorDatos.textoObligatorio(nombre, "nombre del servicio");
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public final void setDestino(String destino) {
+        this.destino = ValidadorDatos.textoObligatorio(destino, "destino");
+    }
+
+    public double getPrecioBase() {
+        return precioBase;
+    }
+
+    public final void setPrecioBase(double precioBase) {
+        this.precioBase = ValidadorDatos.decimalPositivo(precioBase, "precio base");
+    }
+
+    public int getCuposDisponibles() {
+        return cuposDisponibles;
+    }
+
+    public final void setCuposDisponibles(int cuposDisponibles) {
+        this.cuposDisponibles = ValidadorDatos.enteroNoNegativo(
+                cuposDisponibles, "cupos disponibles");
+    }
+
+    public Itinerario getItinerario() {
+        return itinerario;
+    }
+
+    public final void setItinerario(Itinerario itinerario) {
+        if (itinerario == null) {
+            throw new IllegalArgumentException("El itinerario es obligatorio.");
         }
+        this.itinerario = itinerario;
     }
 
-    public double getDuracionHoras() {
-        return duracionHoras;
-    }
-
-    public void setDuracionHoras(double duracionHoras) {
-        if (duracionHoras > 0) {
-            this.duracionHoras = duracionHoras;
-        } else {
-            System.out.println("La duración debe ser mayor que cero. Se asigna 1 hora por defecto.");
-            this.duracionHoras = 1;
-        }
-    }
-
-    public UbicacionServicio getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(UbicacionServicio ubicacion) {
-        if (ubicacion != null) {
-            this.ubicacion = ubicacion;
-        } else {
-            System.out.println("La ubicación no puede ser nula. Se asigna ubicación por defecto.");
-            this.ubicacion = new UbicacionServicio();
-        }
-    }
-
-    public String mostrarInformacion() {
-        return toString();
+    public boolean isRegistrado() {
+        return registrado;
     }
 
     @Override
-    public String mostrarResumen() {
-        return mostrarInformacion();
+    public void registrar() {
+        registrado = true;
+    }
+
+    public double calcularPrecio() {
+        return precioBase;
+    }
+
+    public double calcularPrecio(int cantidadPersonas) {
+        ValidadorDatos.enteroPositivo(cantidadPersonas, "cantidad de personas");
+        return validarTotal(calcularPrecio() * cantidadPersonas);
+    }
+
+    public double calcularPrecio(int cantidadPersonas, boolean incluyeTransporte) {
+        double subtotal = calcularPrecio(cantidadPersonas);
+        return validarTotal(incluyeTransporte
+                ? subtotal + TRANSPORTE_POR_PERSONA * cantidadPersonas
+                : subtotal);
+    }
+
+    public boolean tieneCupos(int cantidadPersonas) {
+        return cantidadPersonas > 0 && cantidadPersonas <= cuposDisponibles;
+    }
+
+    public void reservarCupos(int cantidadPersonas) {
+        if (!tieneCupos(cantidadPersonas)) {
+            throw new IllegalStateException("No hay cupos suficientes para la reserva.");
+        }
+        cuposDisponibles -= cantidadPersonas;
+    }
+
+    public void liberarCupos(int cantidadPersonas) {
+        cuposDisponibles += ValidadorDatos.enteroPositivo(
+                cantidadPersonas, "cantidad de personas");
+    }
+
+    private double validarTotal(double total) {
+        if (!Double.isFinite(total) || total <= 0) {
+            throw new IllegalArgumentException("El total calculado no es válido.");
+        }
+        return total;
+    }
+
+    protected String datosComunes() {
+        return "ID: " + id + " | Nombre: " + nombre + " | Destino: " + destino
+                + " | Precio base: $" + String.format("%.0f", precioBase)
+                + " | Cupos: " + cuposDisponibles + " | Itinerario: " + itinerario;
     }
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                " | Duración: " + duracionHoras + " horas" +
-                " | Ubicación: " + ubicacion;
+        return datosComunes();
     }
 }

@@ -1,44 +1,37 @@
 package model;
 
+import utils.ValidadorDatos;
+
 /**
- * Servicio turístico enfocado en experiencias gastronómicas.
+ * Servicio centrado en preparaciones y productos locales.
  */
-public class RutaGastronomica extends ServicioTuristico {
+public final class RutaGastronomica extends ServicioTuristico {
 
-    private int numeroDeParadas;
+    private String especialidad;
 
-    public RutaGastronomica() {
-        super();
-        this.numeroDeParadas = 1;
+    public RutaGastronomica(String id, String nombre, String destino,
+            double precioBase, int cuposDisponibles, Itinerario itinerario,
+            String especialidad) {
+        super(id, nombre, destino, precioBase, cuposDisponibles, itinerario);
+        setEspecialidad(especialidad);
     }
 
-    public RutaGastronomica(String nombre, double duracionHoras, UbicacionServicio ubicacion, int numeroDeParadas) {
-        super(nombre, duracionHoras);
-        setUbicacion(ubicacion);
-        setNumeroDeParadas(numeroDeParadas);
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public int getNumeroDeParadas() {
-        return numeroDeParadas;
-    }
-
-    public void setNumeroDeParadas(int numeroDeParadas) {
-        if (numeroDeParadas > 0) {
-            this.numeroDeParadas = numeroDeParadas;
-        } else {
-            System.out.println("El número de paradas debe ser mayor que cero. Se asigna 1 por defecto.");
-            this.numeroDeParadas = 1;
-        }
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = ValidadorDatos.textoObligatorio(
+                especialidad, "especialidad gastronómica");
     }
 
     @Override
-    public String mostrarInformacion() {
-        return toString();
+    public String mostrarDatos() {
+        return "Ruta gastronómica | " + datosComunes() + " | Especialidad: " + especialidad;
     }
 
     @Override
     public String toString() {
-        return "Ruta Gastronómica: " + super.toString() +
-                " | Número de paradas: " + numeroDeParadas;
+        return mostrarDatos();
     }
 }

@@ -1,0 +1,3 @@
+id;rut;nombre;telefono;correo;calle;numero;comuna;preferencia
+C001;12345678-5;Ana Pérez;912345678;ana.perez@email.cl;Los Alerces;120;Llanquihue;Gastronomía
+C002;9876543-3;Diego Muñoz;923456789;diego.munoz@email.cl;San Martín;245;Puerto Varas;Navegación
